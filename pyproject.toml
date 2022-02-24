@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "todo_app"
+version = "0.1.0"
+description = ""
+authors = ["Adam Janas"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.2.6"
+djangorestframework = "^3.12.4"
+psycopg2 = "^2.9.1"
+RUST = "^0.1.1"
+cryptography = "^36.0.1"
+
+[tool.poetry.dev-dependencies]
+django-cors-headers = "^3.8.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

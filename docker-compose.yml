@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code/
+    command: python manage.py runserver 0:8000
+    depends_on:
+      - database
+      - frontend
+    environment:
+      - ENVIRONMENT=development
+      - DJANGO_SETTINGS_MODULE=settings.local
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_HOST=database
+      - DB_PORT=5432
+
+  database:
+    container_name: todo_app_db
+    image: postgres:10.6-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
+  frontend:
+    build: ./frontend
+    container_name: todo_app_front
+    image: node:lts-alpine
+    ports:
+      - "8080:8080"
+    command: npm run serve
+    volumes:
+      - .:/code/frontend
